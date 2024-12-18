@@ -1,13 +1,25 @@
-ABC/*
+ABC/**/tests
+ABC/**/contest.acc.json
+ABC/**/a.out
+ABC/**/tests/.gitkeep
 !ABC/.gitkeep
 
-ARC/*
+ARC/**/tests
+ARC/**/contest.acc.json
+ARC/**/a.out
+ARC/**/tests/.gitkeep
 !ARC/.gitkeep
 
-AGC/*
+AGC/**/tests
+AGC/**/contest.acc.json
+AGC/**/a.out
+AGC/**/tests/.gitkeep
 !AGC/.gitkeep
 
-Others/*
+Others/**/tests
+Others/**/contest.acc.json
+Others/**/a.out
+Others/**/tests/.gitkeep
 !Others/.gitkeep
 
 .DS_Store
