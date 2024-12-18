@@ -207,36 +207,26 @@ using mint = modint998244353;
 
 int main(){
   INT(N);
-  VEC(i64,A,N);
-  v1i64 A_CUM = RUI(A);
+  // VEC(mint,A,N);
+  vector<mint> A(N);
+  rep(i,N){
+    INT(a);
+    A[i] = (mint) a;
+  }
   mint res = 0;
-  mint bunsi = 0;
-  mint bunbo = (mint) 1 / (mint)N;
-	// 1回目
-	bunsi += A_CUM[N];
-	res += bunsi/bunbo;
-	bunbo /= (mint)N;
-	if (N==1){
-		cout << res.val() << endl;
-		return 0;
-	}
-	// 2回目
-	bunsi = (mint) 0;
-	rep(i,N) bunsi += A[i]*i;
-	res += bunsi/bunbo;
-	bunbo /= (mint)N;
 
-	if (N==2){
-		cout << res.val() << endl;
-		return 0;
-	}
-	// 3回目～
-	rep(k,3,N+1){
-		bunsi -= (A[N]-A[k-2]);
-		res += bunsi/bunbo;
-		bunbo /= (mint)N;
-	}
-	cout << res.val() << endl;
-	
+  vector<mint> dp(N+1,0);
+  vector<mint> dp_sum(N+1,0);
+
+
+  dp[0] = (mint) 1;
+  dp_sum[0] = (mint) 1;
+  rep(i,1,N+1){
+    dp[i] = dp_sum[i-1]/((mint) N);
+    dp_sum[i] = dp[i]+dp_sum[i-1];
+    res += dp[i]*A[i-1];
+  }
+  cout << res.val() << endl;
+  
 
 }

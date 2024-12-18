@@ -198,8 +198,90 @@ bool cmp(pair_int a, pair_int b) { return a.second < b.second; }
 using mint = modint998244353;
 #pragma endregion
 
-int main(){
-  INT(N);
-	STR(R,C);
+int N;
+string R,C;
+
+map<char,vector<string>> dict;
+vector<vector<string>> res;
+vector<map<char,int>> save;
+
+void dfs(vector<string> now, i64 row, map<char,v1i64> check){
+	// dump(now,row,ls);
+	if (si(now)==N){
+		string candidate = "";
+		rep(i,N){
+			rep(j,N){
+				if (now[j][i]!='.'){
+					candidate += now[j][i];
+					break;
+				}
+			}
+		}
+		if (candidate==C) res.push_back(now);
+		return ;
+	}
 	
+	fore(dst, dict[R[row]]){
+		bool flg = true;
+		rep(i,N){
+			if (check[dst[i]][i]!=-1&&dst[i]!='.') flg = false;
+			else check[dst[i]][i] = row;
+		}
+		// dump(flg);
+		if (flg){
+			now.pb(dst);
+			dfs(now,row+1,check);
+			now.ppb();
+		}
+		rep(i,N){
+			if (check[dst[i]][i]==row&&dst[i]!='.') check[dst[i]][i]=-1;
+		}
+	}
+}
+
+
+int main(){
+  cin >> N;
+	cin >> R >> C;
+	string now = "ABC";
+	rep(i,3,N) now += '.';
+	SORT(now);
+	do{
+		rep(i,N){
+			if (now[i]=='A'){
+				dict[now[i]].pb(now);
+				break;
+			} 
+			if (now[i]=='B'){
+				dict[now[i]].pb(now);
+				break;
+			} 
+			if (now[i]=='C'){
+				dict[now[i]].pb(now);
+				break;
+			} 
+		}
+  }
+  while(next_permutation(all(now)));
+	map<char,v1i64> check;
+	v1i64 tmp(N,-1);
+	check['.'] = tmp;
+	check['A'] = tmp;
+	check['B'] = tmp;
+	check['C'] = tmp;
+	dump(check);
+	dfs({},0,check);
+
+	bool flg = true;
+	dump(res);
+	if (res.size()>0){
+		cout << "Yes" << endl;
+		rep(i,N){
+			cout << res[0][i] << endl;
+		}
+	}
+	else{
+		cout << "No" << endl;
+		
+	}
 }
