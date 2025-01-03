@@ -1,6 +1,8 @@
+// abc328 C - Consecutive
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
+
 // <次のセクションの内容はここに追加する>
 #define dump(...) cpp_dump(__VA_ARGS__)
 namespace cp = cpp_dump;
@@ -179,6 +181,19 @@ void IN2(Head &head, Tail &...tail)
 	--head;
 	IN2(tail...);
 }
+// 出力テンプレート
+template <typename T>
+void print(T out){
+	cout << out << "\n";
+}
+template <typename Iterable>
+void print_all(const Iterable& container) {
+    for (const auto& elem : container) {
+        cout << elem << " ";
+    }
+    cout << endl;
+}
+
 // 反時計周りに 90 度回転
 template <typename T>
 void rot(vector<vector<T>> &v)
@@ -252,5 +267,18 @@ using mint = modint998244353;
 
 int main()
 {
-  
+	INT(N,Q);
+	STR(S);
+	VEC2(i64,L,R,Q);
+	v1i64 ls(N+1,0);
+	rep(i,N-1){
+		if (S[i]==S[i+1]) ls[i+1]++;
+	}
+	rep(i,N){
+		ls[i+1] += ls[i];
+	}
+	rep(i,Q){
+		print(ls[R[i]-1]-ls[L[i]-1]);
+	}
+	dump(ls);
 }

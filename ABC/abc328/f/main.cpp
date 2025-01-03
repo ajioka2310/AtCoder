@@ -1,6 +1,7 @@
+// abc328 F - Good Set Query
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
-#include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
+#include "/workspaces/AtCoder-cpp-env-main/cpp-dump/cpp-dump.hpp"
 // <次のセクションの内容はここに追加する>
 #define dump(...) cpp_dump(__VA_ARGS__)
 namespace cp = cpp_dump;
@@ -252,5 +253,4 @@ using mint = modint998244353;
 
 int main()
 {
-  
 }

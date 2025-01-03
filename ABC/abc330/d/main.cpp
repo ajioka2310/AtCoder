@@ -1,3 +1,4 @@
+// abc330 D - Counting Ls
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -179,6 +180,19 @@ void IN2(Head &head, Tail &...tail)
 	--head;
 	IN2(tail...);
 }
+// 出力テンプレート
+template <typename T>
+void print(T out){
+	cout << out << "\n";
+}
+template <typename Iterable>
+void print_all(const Iterable& container) {
+    for (const auto& elem : container) {
+        cout << elem << " ";
+    }
+    cout << endl;
+}
+
 // 反時計周りに 90 度回転
 template <typename T>
 void rot(vector<vector<T>> &v)
@@ -252,5 +266,37 @@ using mint = modint998244353;
 
 int main()
 {
-  
+	INT(N);
+	v2i64 ls(N,v1i64(N,0));
+	v1i64 yoko(N);
+	v1i64 tate(N);
+	// v2i64 cum(N+1,v1i64(N+1,0));
+	rep(i,N){
+		STR(S);
+		i64 cnt = 0;
+		rep(j,N){
+			if (S[j]=='o'){
+				ls[i][j] = 1;
+				cnt++;
+			} 
+		}
+		yoko[i] = cnt;
+	}
+	rep(j,N){
+		i64 cnt = 0;
+		rep(i,N){
+			if(ls[i][j]==1) cnt++;
+		}
+		tate[j] = cnt;
+	}
+	dump(yoko,tate);
+
+	i64 res = 0;
+	rep(i,N)rep(j,N){
+		if (ls[i][j]==1) res += (yoko[i]-1)*(tate[j]-1);
+	}
+	print(res);
+
+
+
 }

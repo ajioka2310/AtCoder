@@ -1,3 +1,5 @@
+// abc329 F - Colored Ball
+// abc328 B - 11/11
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -179,6 +181,19 @@ void IN2(Head &head, Tail &...tail)
 	--head;
 	IN2(tail...);
 }
+// 出力テンプレート
+template <typename T>
+void print(T out){
+	cout << out << "\n";
+}
+template <typename Iterable>
+void print_all(const Iterable& container) {
+    for (const auto& elem : container) {
+        cout << elem << " ";
+    }
+    cout << endl;
+}
+
 // 反時計周りに 90 度回転
 template <typename T>
 void rot(vector<vector<T>> &v)
@@ -252,5 +267,4 @@ using mint = modint998244353;
 
 int main()
 {
-  
 }

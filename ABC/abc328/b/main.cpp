@@ -1,3 +1,4 @@
+// abc328 B - 11/11
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -179,6 +180,19 @@ void IN2(Head &head, Tail &...tail)
 	--head;
 	IN2(tail...);
 }
+// 出力テンプレート
+template <typename T>
+void print(T out){
+	cout << out << "\n";
+}
+template <typename Iterable>
+void print_all(const Iterable& container) {
+    for (const auto& elem : container) {
+        cout << elem << " ";
+    }
+    cout << endl;
+}
+
 // 反時計周りに 90 度回転
 template <typename T>
 void rot(vector<vector<T>> &v)
@@ -252,5 +266,20 @@ using mint = modint998244353;
 
 int main()
 {
-  
+	INT(N);
+	VEC(i64,D,N);
+	i64 res = 0;
+	rep(i,1,N+1){
+		rep(j,1,D[i-1]+1){
+			set<i64> ls;
+			fore(k,to_string(i)){
+					ls.insert(k);
+			}
+			fore(k,to_string(j)){
+					ls.insert(k);
+			}
+			if (ls.size()==1) res++;
+		}
+	}
+	print(res);
 }

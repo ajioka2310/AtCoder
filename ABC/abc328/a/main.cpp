@@ -1,3 +1,4 @@
+// abc328 A - Not Too Hard
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -245,6 +246,18 @@ const int MOD = 998244353;
 inline string YESNO(bool cond) { return cond ? "YES" : "NO"; }
 inline string yesno(bool cond) { return cond ? "yes" : "no"; }
 inline string YesNo(bool cond) { return cond ? "Yes" : "No"; }
+// 出力テンプレート
+template <typename T>
+void print(T out){
+	cout << out << "\n";
+}
+template <typename Iterable>
+void print_all(const Iterable& container) {
+    for (const auto& elem : container) {
+        cout << elem << " ";
+    }
+    cout << endl;
+}
 
 bool cmp(pair_int a, pair_int b) { return a.second < b.second; }
 using mint = modint998244353;
@@ -252,5 +265,11 @@ using mint = modint998244353;
 
 int main()
 {
-  
+	INT(N,X);
+	VEC(i64,S,N);
+	i64 res = 0;
+	fore(s,S){
+		if (s<=X) res+=s;
+	}
+	print(res);
 }
