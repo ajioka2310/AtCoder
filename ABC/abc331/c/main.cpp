@@ -1,4 +1,4 @@
-// abc332 C - T-shirts
+// abc331 C - Sum of Numbers Greater Than Me
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -183,7 +183,7 @@ void IN2(Head &head, Tail &...tail)
 // 出力テンプレート
 template <typename T>
 void print(T out){
-	cout << out << "\n";
+	cout << out << " ";
 }
 template <typename Iterable>
 void print_all(const Iterable& container) {
@@ -266,65 +266,17 @@ using mint = modint998244353;
 
 int main()
 {
-	INT(N,M);
-	STR(S);
-	i64 now_m = M;
-	// 0で行けるか判定
-	bool flg = true;
-	fore(s,S){
-		if (s=='0') now_m = M;
-		if (s=='1'){
-			if (now_m<1){
-				flg = false;
-				break;
-			} 
-			else now_m--;
-		}
-		if (s=='2'){
-			flg = false;
-			break;
-		}
-	}
-	if (flg){
-		print(0);
-		return 0;
+	INT(N);
+	VEC(i64,A,N);
+	i64 A_MAX = max_value(A);
+	v1i64 ls(A_MAX+1,0);
+	fore(a,A){
+		ls[a]+=a;
+	} 
+	rep(i,1,A_MAX+1) ls[i]+= ls[i-1];
+	fore(a,A){
+		print(ls[A_MAX]-ls[a]);
 	}
 
-	// 1以上の最小値
-	i64 ng = 0;
-	i64 ok = 100000;
-	while(ok-ng>1){
-		i64 mid = (ok+ng)/2;
-		i64 now_mid = mid;
-		now_m = M;
-		flg = true;
-		fore(s,S){
-			if (s=='0'){
-				now_m = M;
-				now_mid = mid;
-			}
-			if (s=='1'){
-				if (now_m+now_mid<1){
-					flg = false;
-					break;
-				}
-				else{
-					if(now_m>0) now_m--;
-					else now_mid--;
-				}
-			}
-			if (s=='2'){
-				if (now_mid<1){
-					flg = false;
-					break;
-				}
-				else now_mid--;
-			}
-		}
-		dump(flg,mid);
-		if (flg) ok = mid;
-		else ng = mid;
-	}
-	print(ok);
-
+	
 }

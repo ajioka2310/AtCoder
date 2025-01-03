@@ -23,6 +23,12 @@ fi
 cd "$(dirname "$file_path")" || exit 0
 
 # 提出の実行
-timeout 20s acc submit main.cpp -- -y
+# 提出先タスクを指定するため、-t フラグを追加
+PARENT=$(basename "$(dirname "$(pwd)")")  # 親ディレクトリ名を取得
+CURRENT=$(basename "$(pwd)")             # カレントディレクトリ名を取得
+TASK="${PARENT}_${CURRENT}"
+TASK=$(echo "$TASK" | tr '[:upper:]' '[:lower:]')  # 小文字に変換
+# echo $TASK
+timeout 20s acc submit main.cpp -t "$TASK" -- -y
 
 exit 0

@@ -1,4 +1,4 @@
-// abc332 C - T-shirts
+// abc331 E - Set Meal
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -266,65 +266,4 @@ using mint = modint998244353;
 
 int main()
 {
-	INT(N,M);
-	STR(S);
-	i64 now_m = M;
-	// 0で行けるか判定
-	bool flg = true;
-	fore(s,S){
-		if (s=='0') now_m = M;
-		if (s=='1'){
-			if (now_m<1){
-				flg = false;
-				break;
-			} 
-			else now_m--;
-		}
-		if (s=='2'){
-			flg = false;
-			break;
-		}
-	}
-	if (flg){
-		print(0);
-		return 0;
-	}
-
-	// 1以上の最小値
-	i64 ng = 0;
-	i64 ok = 100000;
-	while(ok-ng>1){
-		i64 mid = (ok+ng)/2;
-		i64 now_mid = mid;
-		now_m = M;
-		flg = true;
-		fore(s,S){
-			if (s=='0'){
-				now_m = M;
-				now_mid = mid;
-			}
-			if (s=='1'){
-				if (now_m+now_mid<1){
-					flg = false;
-					break;
-				}
-				else{
-					if(now_m>0) now_m--;
-					else now_mid--;
-				}
-			}
-			if (s=='2'){
-				if (now_mid<1){
-					flg = false;
-					break;
-				}
-				else now_mid--;
-			}
-		}
-		dump(flg,mid);
-		if (flg) ok = mid;
-		else ng = mid;
-	}
-	print(ok);
-
 }
