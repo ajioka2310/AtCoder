@@ -266,4 +266,25 @@ using mint = modint998244353;
 
 int main()
 {
+	INT(N,Q);
+	VEC(i64,A,N);
+	set<i64> ls;
+	map<i64,i64> dict;
+	fore(a,A){
+		dict[a]++;
+	}
+	rep(i,202020){
+		if (dict.contains(i)) continue;
+		else ls.insert(i);
+	}
+
+	rep(Q){
+		INT(i,x);i--;
+		dict[A[i]]--;
+		if (dict[A[i]]==0) ls.insert(A[i]);
+		A[i] = x;
+		dict[A[i]]++;
+		if (dict[A[i]]==1) ls.erase(A[i]);
+		print(*ls.begin());
+	}
 }
