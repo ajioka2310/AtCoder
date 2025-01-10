@@ -1,3 +1,4 @@
+// abc334 C - Socks 2
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -79,11 +80,8 @@ using pair_int = pair<int, int>;
 #define SORT(v) sort(all(v))
 #define REV(v) reverse(all(v))
 // 2分探索
-// x<=c[i]を満たす最小インデックス
 #define lb(c, x) distance((c).begin(), lower_bound(all(c), (x)))
 #define lbg(c, x) distance((c).begin(), lower_bound(all(c), (x), greater{}))
-// x<c[i]を満たす最小インデックス
-// ub-1 <-> c[i]<=xを満たす最大インデックス
 #define ub(c, x) distance((c).begin(), upper_bound(all(c), (x)))
 #define ubg(c, x) distance((c).begin(), upper_bound(all(c), (x), greater{}))
 
@@ -268,4 +266,38 @@ using mint = modint998244353;
 
 int main()
 {
+	INT(N,K);
+	VEC(i64,A,K);
+	sort(all(A));
+	dump(A);
+	if (K%2==0){
+		i64 res = 0;
+		rep(i,K-1){
+			res += A[i+1]-A[i];
+			i++;
+		}
+		print(res);
+	}
+	else{
+		i64 res = INF;
+		v1i64 FRONT,BACK;
+		FRONT.push_back(0);
+		rep(i,K-1){
+			dump(i);
+			FRONT.push_back(A[i+1]-A[i]);
+			BACK.push_back(A[i+2]-A[i+1]);
+			i++;
+		}
+		BACK.push_back(0);
+		rep(i,si(FRONT)-1){
+			FRONT[i+1]+= FRONT[i];
+			BACK[si(BACK)-2-i] += BACK[si(BACK)-1-i];
+		}
+		dump(FRONT,BACK);
+		rep(i,si(FRONT)){
+			chmin(res,FRONT[i]+BACK[i]);
+		}
+		print(res);
+	}
+
 }

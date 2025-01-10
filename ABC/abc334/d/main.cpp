@@ -1,3 +1,4 @@
+// abc334 D - Reindeer and Sleigh
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -79,11 +80,8 @@ using pair_int = pair<int, int>;
 #define SORT(v) sort(all(v))
 #define REV(v) reverse(all(v))
 // 2分探索
-// x<=c[i]を満たす最小インデックス
 #define lb(c, x) distance((c).begin(), lower_bound(all(c), (x)))
 #define lbg(c, x) distance((c).begin(), lower_bound(all(c), (x), greater{}))
-// x<c[i]を満たす最小インデックス
-// ub-1 <-> c[i]<=xを満たす最大インデックス
 #define ub(c, x) distance((c).begin(), upper_bound(all(c), (x)))
 #define ubg(c, x) distance((c).begin(), upper_bound(all(c), (x), greater{}))
 
@@ -268,4 +266,15 @@ using mint = modint998244353;
 
 int main()
 {
+	INT(N,Q);
+	VEC(i64,R,N);
+	SORT(R);
+	v1i64 R_C(N+1);
+	rep(i,N) R_C[i+1] = R_C[i] + R[i];
+	dump(R_C);
+	rep(Q){
+		INT(q);
+		dump(q);
+		print(ub(R_C,q)-1);
+	}
 }
