@@ -15,11 +15,11 @@ using namespace std;
 #define rep_bit(bit,n) for (int bit = 0; bit < (1<<n); ++bit)
 #define all(a) (a).begin(), (a).end()
 
-#include "/workspaces/AtCoder-cpp-env-main/cpp-dump/cpp-dump.hpp"
+#include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
 namespace cp = cpp_dump;
 
 int func1(){
-  set<int> v = {0,1,3,5};
+  set<int> v = {0,1,3,5,99999999};
   rep(i,7){
     decltype(v)::iterator iter_lower = v.lower_bound(i);
     int idx_lower = distance(v.begin(),iter_lower);
