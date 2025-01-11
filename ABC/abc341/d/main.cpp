@@ -1,4 +1,4 @@
-// abc340 C - Divide and Divide
+// abc341 D - Only one of two
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -266,17 +266,33 @@ inline string YesNo(bool cond) { return cond ? "Yes" : "No"; }
 bool cmp(pair_int a, pair_int b) { return a.second < b.second; }
 using mint = modint998244353;
 #pragma endregion
-map<ll,ll> memo;
 
-ll func(ll N){
-	if(N==1) return 0;
-	if(memo.count(N)) return memo[N];
-	memo[N] = func(N/2)+func((N+1)/2)+N;
-	return memo[N];
+long long gcd(long long a, long long b) {
+    if (b == 0) {
+        return a;
+    } else {
+        return gcd(b, a % b);
+    }
+}
+
+/*  lcm (a, b) : 2整数版
+    入力：整数 a, b
+    出力：aとbの最小公倍数
+*/
+long long lcm(long long a, long long b) {
+    long long d = gcd(a, b);
+    return a / d * b;
 }
 
 int main()
 {
-	INT(N);
-	print(func(N));
+	INT(N,M,K);
+	ll L = lcm(N,M);
+	ll ng = 0, ok = 2e18;
+	while(ok-ng>1){
+		ll mid = (ok+ng)/2;
+		if (mid/N+mid/M-2*(mid/L)>=K) ok = mid;
+		else ng = mid;
+	}
+	print(ok);
 }

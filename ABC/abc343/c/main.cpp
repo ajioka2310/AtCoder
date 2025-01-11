@@ -1,4 +1,4 @@
-// abc340 C - Divide and Divide
+// abc343 C - 343
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -266,17 +266,7 @@ inline string YesNo(bool cond) { return cond ? "Yes" : "No"; }
 bool cmp(pair_int a, pair_int b) { return a.second < b.second; }
 using mint = modint998244353;
 #pragma endregion
-map<ll,ll> memo;
-
-ll func(ll N){
-	if(N==1) return 0;
-	if(memo.count(N)) return memo[N];
-	memo[N] = func(N/2)+func((N+1)/2)+N;
-	return memo[N];
-}
 
 int main()
 {
-	INT(N);
-	print(func(N));
 }

@@ -267,6 +267,67 @@ bool cmp(pair_int a, pair_int b) { return a.second < b.second; }
 using mint = modint998244353;
 #pragma endregion
 
+struct Edge{
+    i64 to;
+    i64 cost;
+};
+using Graph = vector<vector<Edge>>;
+using Pair = pair<i64,i64>;
+
+// ダイクストラ
+void Dijkstra(const Graph& graph, v1i64& distances, i64 startIndex, v1i64& path){
+    pqasc<Pair> q;
+    distances[startIndex] = 0;
+    q.emplace((distances[startIndex]),startIndex);
+    while(!q.empty()){
+        // 探索ポイントの取り出し
+        i64 distance = q.top().first;
+        int from = q.top().second;
+        q.pop();
+        // 最短距離のみ処理（枝刈）
+        if (distances[from]<distance) continue;
+        // 現在ノードから
+        for (const auto& edge: graph[from]){
+            i64 new_d = (distances[from]+edge.cost);
+            // 最短距離であれば更新
+            if (new_d < distances[edge.to]){
+                distances[edge.to] = new_d;
+                path[edge.to] = from;
+                q.emplace(distances[edge.to],edge.to);
+            }
+        }
+
+    }
+}
+
+// int main(){
+//   i64 V = 4;
+//   i64 E = 6;
+//   i64 r = 3;
+//   Graph graph = {
+//     {{1,1},{2,4}},//0
+//     {{2,2}},//1
+//     {{0,1}},//2
+//     {{1,1},{2,5}},//3
+//   };
+//   v1i64 distances(V,INF);
+//   v1i64 path(V,-1);
+//   Dijkstra(graph,distances,r,path);
+//   dump(path);
+//   dump(distances);
+// }
+
 int main()
 {
+	INT(N);
+	Graph graph(N);
+	rep(i,N-1){
+		INT(A,B,X);
+		graph[i].push_back({i+1,A});
+		graph[i].push_back({X-1,B});
+	}
+	v1i64 distances(N,INF);
+	v1i64 path(N,-1);
+	Dijkstra(graph,distances,0,path);
+	print(distances[N-1]);
 }

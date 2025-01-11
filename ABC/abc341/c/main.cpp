@@ -1,4 +1,4 @@
-// abc340 C - Divide and Divide
+// abc341 C - Takahashi Gets Lost
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
@@ -266,17 +266,35 @@ inline string YesNo(bool cond) { return cond ? "Yes" : "No"; }
 bool cmp(pair_int a, pair_int b) { return a.second < b.second; }
 using mint = modint998244353;
 #pragma endregion
-map<ll,ll> memo;
-
-ll func(ll N){
-	if(N==1) return 0;
-	if(memo.count(N)) return memo[N];
-	memo[N] = func(N/2)+func((N+1)/2)+N;
-	return memo[N];
-}
 
 int main()
 {
-	INT(N);
-	print(func(N));
+	INT(H,W,N);
+	STR(T);
+	vector<string> ls;
+	rep(i,H){
+		STR(S);
+		ls.push_back(S);
+	}
+
+	ll res = 0;
+	rep(si,1,H-1)rep(sj,1,W-1){
+		ll now_i = si;
+		ll now_j = sj;
+		if(ls[now_i][now_j]=='.'){
+			bool flg = true;
+			fore(act,T){
+				if(act=='L') now_j--;
+				if(act=='R') now_j++;
+				if(act=='U') now_i--;
+				if(act=='D') now_i++;
+				if(ls[now_i][now_j]!='.'){
+					flg = false;
+					break;
+				}
+			}
+			if(flg) res++;
+		}
+	}
+	print(res);
 }

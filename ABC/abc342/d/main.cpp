@@ -1,7 +1,7 @@
 // abc342 D - Square Pair
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
-#include "/workspaces/AtCoder-cpp-env-main/cpp-dump/cpp-dump.hpp"
+#include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
 // <次のセクションの内容はここに追加する>
 #define dump(...) cpp_dump(__VA_ARGS__)
 namespace cp = cpp_dump;
@@ -80,8 +80,11 @@ using pair_int = pair<int, int>;
 #define SORT(v) sort(all(v))
 #define REV(v) reverse(all(v))
 // 2分探索
+// x<=c[i]を満たす最小インデックス
 #define lb(c, x) distance((c).begin(), lower_bound(all(c), (x)))
 #define lbg(c, x) distance((c).begin(), lower_bound(all(c), (x), greater{}))
+// x<c[i]を満たす最小インデックス
+// ub-1 <-> c[i]<=xを満たす最大インデックス
 #define ub(c, x) distance((c).begin(), upper_bound(all(c), (x)))
 #define ubg(c, x) distance((c).begin(), upper_bound(all(c), (x), greater{}))
 
@@ -180,6 +183,19 @@ void IN2(Head &head, Tail &...tail)
 	--head;
 	IN2(tail...);
 }
+// 出力テンプレート
+template <typename T>
+void print(T out){
+	cout << out << "\n";
+}
+template <typename Iterable>
+void print_all(const Iterable& container) {
+    for (const auto& elem : container) {
+        cout << elem << " ";
+    }
+    cout << endl;
+}
+
 // 反時計周りに 90 度回転
 template <typename T>
 void rot(vector<vector<T>> &v)
@@ -251,9 +267,66 @@ bool cmp(pair_int a, pair_int b) { return a.second < b.second; }
 using mint = modint998244353;
 #pragma endregion
 
+vector<pair<long long,long long> > prime_factorize(long long N) {
+    vector<pair<long long,long long> > res;
+    for (long long a = 2; a * a <= N; ++a) {
+        if (N % a != 0) continue;
+        long long ex = 0; // 指数
+
+        // 割れる限り割り続ける
+        while (N % a == 0) {
+            ++ex;
+            N /= a;
+        }
+
+        // その結果を push
+        res.push_back({a, ex});
+    }
+    // 最後に残った数について
+    if (N != 1) res.push_back({N, 1});
+    return res;
+}
+
+
 int main()
 {
 	INT(N);
-	VEC(i64, A, N);
-	
+	VEC(ll,A,N);
+	v1i64 res;
+	rep(i,N){
+		if(A[i]==0){
+			res.push_back(0);
+			continue;
+		}
+		auto now = prime_factorize(A[i]);
+		ll x = 1;
+		fore(a,b,now){
+			if(b%2==1) x*=a;
+		}
+		res.push_back(x);
+	}
+	SORT(res);
+  // ランレングス 圧縮でSを圧縮
+  vector<pair<ll,ll>> rl;
+  int cnt=1;
+  rep(i,res.size()-1){
+    if(res[i]==res[i+1]){
+      cnt++;
+    }else{
+      rl.push_back({res[i],cnt});
+      cnt=1;
+    }
+  }
+  rl.push_back({res[N-1],cnt});
+  dump(rl);
+	ll out = 0;
+	fore(a,b,rl){
+		if(a==0){
+			rep(i,b) out += N-1-i;
+		}
+		else{
+			out += b*(b-1)/2;
+		}
+	}
+	print(out);
 }

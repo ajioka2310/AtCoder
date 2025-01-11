@@ -1,7 +1,7 @@
 // abc342 G - Retroactive Range Chmax
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
-#include "/workspaces/AtCoder-cpp-env-main/cpp-dump/cpp-dump.hpp"
+#include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"
 // <次のセクションの内容はここに追加する>
 #define dump(...) cpp_dump(__VA_ARGS__)
 namespace cp = cpp_dump;
@@ -80,8 +80,11 @@ using pair_int = pair<int, int>;
 #define SORT(v) sort(all(v))
 #define REV(v) reverse(all(v))
 // 2分探索
+// x<=c[i]を満たす最小インデックス
 #define lb(c, x) distance((c).begin(), lower_bound(all(c), (x)))
 #define lbg(c, x) distance((c).begin(), lower_bound(all(c), (x), greater{}))
+// x<c[i]を満たす最小インデックス
+// ub-1 <-> c[i]<=xを満たす最大インデックス
 #define ub(c, x) distance((c).begin(), upper_bound(all(c), (x)))
 #define ubg(c, x) distance((c).begin(), upper_bound(all(c), (x), greater{}))
 
@@ -180,6 +183,19 @@ void IN2(Head &head, Tail &...tail)
 	--head;
 	IN2(tail...);
 }
+// 出力テンプレート
+template <typename T>
+void print(T out){
+	cout << out << "\n";
+}
+template <typename Iterable>
+void print_all(const Iterable& container) {
+    for (const auto& elem : container) {
+        cout << elem << " ";
+    }
+    cout << endl;
+}
+
 // 反時計周りに 90 度回転
 template <typename T>
 void rot(vector<vector<T>> &v)
