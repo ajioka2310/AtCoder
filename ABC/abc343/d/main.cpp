@@ -269,4 +269,23 @@ using mint = modint998244353;
 
 int main()
 {
+	INT(N,T);
+	VEC2(ll,A,B,T);
+	rep(i,T) A[i]--;
+	v1i64 ls(N,0);
+	map<ll,ll> dict;
+	set<ll> now;
+	now.insert(0);
+	dict[0] = N;
+
+	rep(i,T){
+		dict[ls[A[i]]]--;
+		if(dict[ls[A[i]]]==0) now.erase(ls[A[i]]);
+
+		ls[A[i]]+= B[i];
+		dict[ls[A[i]]]++;
+		if(dict[ls[A[i]]]==1) now.insert(ls[A[i]]);
+		print(now.size());
+	}
+	
 }

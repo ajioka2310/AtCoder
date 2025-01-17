@@ -29,6 +29,6 @@ CURRENT=$(basename "$(pwd)")             # カレントディレクトリ名を�
 TASK="${PARENT}_${CURRENT}"
 TASK=$(echo "$TASK" | tr '[:upper:]' '[:lower:]')  # 小文字に変換
 # echo $TASK
-timeout 20s acc submit main.cpp -t "$TASK" -- -y
+timeout 20s acc submit main.cpp -t "$TASK" -- --no-open -y
 
 exit 0

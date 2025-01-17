@@ -98,9 +98,6 @@ using pair_int = pair<int, int>;
 #define INT(...)   \
 	i64 __VA_ARGS__; \
 	IN(__VA_ARGS__)
-#define INTd(...)  \
-	i64 __VA_ARGS__; \
-	IN2(__VA_ARGS__)
 #define STR(...)      \
 	string __VA_ARGS__; \
 	IN(__VA_ARGS__)
@@ -114,39 +111,21 @@ using pair_int = pair<int, int>;
 #define VEC(type, name, size) \
 	vector<type> name(size);    \
 	IN(name)
-#define VECd(type, name, size) \
-	vector<type> name(size);     \
-	IN2(name)
 #define VEC2(type, name1, name2, size)   \
 	vector<type> name1(size), name2(size); \
 	for (int i = 0; i < size; i++)         \
 	IN(name1[i], name2[i])
-#define VEC2d(type, name1, name2, size)  \
-	vector<type> name1(size), name2(size); \
-	for (int i = 0; i < size; i++)         \
-	IN2(name1[i], name2[i])
 #define VEC3(type, name1, name2, name3, size)         \
 	vector<type> name1(size), name2(size), name3(size); \
 	for (int i = 0; i < size; i++)                      \
 	IN(name1[i], name2[i], name3[i])
-#define VEC3d(type, name1, name2, name3, size)        \
-	vector<type> name1(size), name2(size), name3(size); \
-	for (int i = 0; i < size; i++)                      \
-	IN2(name1[i], name2[i], name3[i])
 #define VEC4(type, name1, name2, name3, name4, size)               \
 	vector<type> name1(size), name2(size), name3(size), name4(size); \
 	for (int i = 0; i < size; i++)                                   \
 		IN(name1[i], name2[i], name3[i], name4[i]);
-#define VEC4d(type, name1, name2, name3, name4, size)              \
-	vector<type> name1(size), name2(size), name3(size), name4(size); \
-	for (int i = 0; i < size; i++)                                   \
-		IN2(name1[i], name2[i], name3[i], name4[i]);
 #define VV(type, name, h, w)                     \
 	vector<vector<type>> name(h, vector<type>(w)); \
 	IN(name)
-#define VVd(type, name, h, w)                    \
-	vector<vector<type>> name(h, vector<type>(w)); \
-	IN2(name)
 // scan
 int scan() { return getchar(); }
 void scan(int &a) { cin >> a; }
@@ -168,19 +147,11 @@ template <class T>
 void scan(T &a) { cin >> a; }
 // IN定義
 void IN() {}
-void IN2() {}
 template <class Head, class... Tail>
 void IN(Head &head, Tail &...tail)
 {
 	scan(head);
 	IN(tail...);
-}
-template <class Head, class... Tail>
-void IN2(Head &head, Tail &...tail)
-{
-	scan(head);
-	--head;
-	IN2(tail...);
 }
 // 出力テンプレート
 template <typename T>
