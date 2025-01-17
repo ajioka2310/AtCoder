@@ -53,6 +53,25 @@ for PROBLEM_DIR in ${WORKING_DIR}/${contest_id}/*/; do
     fi
 done
 
+TEMPLATE="${WORKSPACE_DIR}/.templates/template.py"
+
+# 各難度のフォルダにテンプレートがない場合作成
+for PROBLEM_DIR in ${WORKING_DIR}/${contest_id}/*/; do
+    if [ -d "$PROBLEM_DIR" ]; then
+        if [ ! -f "${PROBLEM_DIR}main.py" ]; then
+            # ディレクトリ名から問題のラベル（a, b, c...）を取得
+            problem_letter=$(basename "$PROBLEM_DIR")
+
+            # 該当する問題のタイトルを取得
+            problem_title=$(jq -r --arg problem_letter "$problem_letter" '.tasks[] | select(.directory.path == $problem_letter) | .title' "${WORKING_DIR}/${contest_id}/contest.acc.json")
+
+            # テンプレートファイルをコピーし、問題情報を挿入
+            cp -n $TEMPLATE "${PROBLEM_DIR}main.py"
+            echo "// ${contest_id} ${problem_letter^^} - $problem_title" | cat - "${PROBLEM_DIR}main.py" > temp && mv temp "${PROBLEM_DIR}main.cpp"
+        fi
+    fi
+done
+
 # 最も若いディレクトリに移動
 first_problem_dir=$(find "${contest_id}" -mindepth 1 -maxdepth 1 -type d | sort | head -n 1)
 

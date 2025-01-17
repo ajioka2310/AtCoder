@@ -2,7 +2,40 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "-a.テスト",
+            "label": "-00.ログイン",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/.scripts/login.sh"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+            }
+        },
+        
+        {
+            "label": "-01.ダウンロード",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/.scripts/setup_problem.sh",
+                "task"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+            }
+        },
+
+        {
+            "label": "-02.テスト(C++)",
             "type": "shell",
             "command": "bash",
             "args": [
@@ -18,7 +51,23 @@
             }
         },
         {
-            "label": "-b.提出",
+            "label": "-02.テスト(python)",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/.scripts/t_test_py.sh",
+                "${file}"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "-03.提出(C++)",
             "type": "shell",
             "command": "bash",
             "args": [
@@ -34,12 +83,12 @@
             }
         },
         {
-            "label": "-c.ダウンロード",
+            "label": "-03.提出(python)",
             "type": "shell",
             "command": "bash",
             "args": [
-                "${workspaceFolder}/.scripts/setup_problem.sh",
-                "task"
+                "${workspaceFolder}/.scripts/t_submit_py.sh",
+                "${file}"
             ],
             "problemMatcher": [],
             "presentation": {
@@ -49,21 +98,7 @@
                 "panel": "shared",
             }
         },
-        {
-            "label": "-d.ログイン",
-            "type": "shell",
-            "command": "bash",
-            "args": [
-                "${workspaceFolder}/.scripts/login.sh"
-            ],
-            "problemMatcher": [],
-            "presentation": {
-                "echo": true,
-                "reveal": "always",
-                "focus": true,
-                "panel": "shared",
-            }
-        },
+
         {
             "label": "compileBeforeDebug",
             "type": "shell",
