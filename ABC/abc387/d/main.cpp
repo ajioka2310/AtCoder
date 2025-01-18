@@ -1,4 +1,4 @@
-// abc383 G - Bar Cover
+// abc387 D - Snaky Walk
 #pragma region Macros
 #ifdef DEFINED_ONLY_IN_LOCAL
 #include "/workspaces/AtCoder/cpp-dump/cpp-dump.hpp"

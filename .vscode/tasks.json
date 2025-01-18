@@ -141,5 +141,15 @@
                 "compileBeforeDebug"
             ],
         },
+        {
+            "label": "execute with input.txt(python)",
+            "type": "shell",
+            "command": "python3 ${file} < ${workspaceFolder}/debug.in",
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+            }
+        },
     ]
 }

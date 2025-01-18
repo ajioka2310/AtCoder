@@ -67,7 +67,7 @@ for PROBLEM_DIR in ${WORKING_DIR}/${contest_id}/*/; do
 
             # テンプレートファイルをコピーし、問題情報を挿入
             cp -n $TEMPLATE "${PROBLEM_DIR}main.py"
-            echo "// ${contest_id} ${problem_letter^^} - $problem_title" | cat - "${PROBLEM_DIR}main.py" > temp && mv temp "${PROBLEM_DIR}main.cpp"
+            echo "# ${contest_id} ${problem_letter^^} - $problem_title" | cat - "${PROBLEM_DIR}main.py" > temp && mv temp "${PROBLEM_DIR}main.py"
         fi
     fi
 done
