@@ -33,7 +33,7 @@ fi
 
 # ファイルを開く
 if command -v code &> /dev/null; then
-    code main.cpp
+    code main.py
 elif command -v cursor &> /dev/null; then
-    cursor main.cpp
+    cursor main.py
 fi

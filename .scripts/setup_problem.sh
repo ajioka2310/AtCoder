@@ -33,25 +33,25 @@ if [ -z "$contest_id" ] || [ ! -d "${WORKING_DIR}/${contest_id}" ]; then
     fi
 fi
 
-# テンプレートファイルのパスを設定
-TEMPLATE="${WORKSPACE_DIR}/.templates/template.cpp"
+# # テンプレートファイルのパスを設定
+# TEMPLATE="${WORKSPACE_DIR}/.templates/template.cpp"
 
-# 各難度のフォルダにテンプレートがない場合作成
-for PROBLEM_DIR in ${WORKING_DIR}/${contest_id}/*/; do
-    if [ -d "$PROBLEM_DIR" ]; then
-        if [ ! -f "${PROBLEM_DIR}main.cpp" ]; then
-            # ディレクトリ名から問題のラベル（a, b, c...）を取得
-            problem_letter=$(basename "$PROBLEM_DIR")
+# # 各難度のフォルダにテンプレートがない場合作成
+# for PROBLEM_DIR in ${WORKING_DIR}/${contest_id}/*/; do
+#     if [ -d "$PROBLEM_DIR" ]; then
+#         if [ ! -f "${PROBLEM_DIR}main.cpp" ]; then
+#             # ディレクトリ名から問題のラベル（a, b, c...）を取得
+#             problem_letter=$(basename "$PROBLEM_DIR")
 
-            # 該当する問題のタイトルを取得
-            problem_title=$(jq -r --arg problem_letter "$problem_letter" '.tasks[] | select(.directory.path == $problem_letter) | .title' "${WORKING_DIR}/${contest_id}/contest.acc.json")
+#             # 該当する問題のタイトルを取得
+#             problem_title=$(jq -r --arg problem_letter "$problem_letter" '.tasks[] | select(.directory.path == $problem_letter) | .title' "${WORKING_DIR}/${contest_id}/contest.acc.json")
 
-            # テンプレートファイルをコピーし、問題情報を挿入
-            cp -n $TEMPLATE "${PROBLEM_DIR}main.cpp"
-            echo "// ${contest_id} ${problem_letter^^} - $problem_title" | cat - "${PROBLEM_DIR}main.cpp" > temp && mv temp "${PROBLEM_DIR}main.cpp"
-        fi
-    fi
-done
+#             # テンプレートファイルをコピーし、問題情報を挿入
+#             cp -n $TEMPLATE "${PROBLEM_DIR}main.cpp"
+#             echo "// ${contest_id} ${problem_letter^^} - $problem_title" | cat - "${PROBLEM_DIR}main.cpp" > temp && mv temp "${PROBLEM_DIR}main.cpp"
+#         fi
+#     fi
+# done
 
 TEMPLATE="${WORKSPACE_DIR}/.templates/template.py"
 
@@ -79,7 +79,7 @@ cd "$first_problem_dir"
 
 #ファイルを開く
 if command -v code &> /dev/null; then
-    code main.cpp
+    code main.py
 elif command -v cursor &> /dev/null; then
-    cursor main.cpp
+    cursor main.py
 fi
